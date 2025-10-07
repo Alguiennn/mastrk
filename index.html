@@ -20,30 +20,32 @@
     nav {
       position: fixed;
       top: 0; left: 0; width: 100%;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.85);
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       padding: 15px;
       z-index: 1000;
     }
     nav a {
-      margin: 0 15px;
+      margin: 8px 12px;
       color: #ccc;
       font-weight: bold;
       transition: 0.3s;
+      font-size: 0.95rem;
     }
     nav a:hover { color: #9d7cff; }
 
     /* ====== HEADER ====== */
     header {
-      padding: 100px 20px 60px;
+      padding: 120px 20px 80px;
       text-align: center;
     }
-    header img { width: 120px; margin-bottom: 20px; }
-    header h1 { font-size: 3rem; color: #9d7cff; margin: 0; }
-    header p { font-size: 1.2rem; color: #ccc; }
+    header img { width: 120px; margin-bottom: 20px; max-width: 80%; }
+    header h1 { font-size: 2.5rem; color: #9d7cff; margin: 0; }
+    header p { font-size: 1.1rem; color: #ccc; margin-top: 10px; }
     .btn {
-      display: inline-block; margin-top: 20px;
+      display: inline-block; margin-top: 25px;
       padding: 12px 25px; background: #9d7cff;
       border-radius: 8px; color: #fff; font-weight: bold;
       transition: 0.3s;
@@ -57,8 +59,8 @@
       margin: auto;
       text-align: center;
     }
-    section h2 { color: #bba8ff; margin-bottom: 15px; }
-    section p { color: #ddd; line-height: 1.6; }
+    section h2 { color: #bba8ff; margin-bottom: 20px; font-size: 1.8rem; }
+    section p { color: #ddd; line-height: 1.6; font-size: 1rem; }
 
     /* ====== FEATURES ====== */
     .features {
@@ -70,10 +72,10 @@
     .feature {
       background: rgba(255,255,255,0.05);
       padding: 20px; border-radius: 12px;
-      transition: 0.3s; 
+      transition: 0.3s;
     }
     .feature:hover { transform: translateY(-5px); }
-    .feature img { width: 50px; margin-bottom: 10px; }
+    .feature img { width: 50px; margin-bottom: 15px; max-width: 100%; }
 
     /* ====== CONTACTO ====== */
     form {
@@ -84,6 +86,7 @@
       margin: 10px 0; padding: 12px;
       border: none; border-radius: 6px;
       font-size: 1rem;
+      width: 100%;
     }
     form button {
       padding: 12px; border: none;
@@ -95,11 +98,28 @@
 
     /* ====== FOOTER ====== */
     footer {
-      background: #111; padding: 20px;
+      background: #111; padding: 25px 15px;
       text-align: center; font-size: 0.9rem;
       color: #888;
     }
-    footer a { color: #9d7cff; margin: 0 10px; }
+    footer a { color: #9d7cff; margin: 0 8px; }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      header p { font-size: 1rem; }
+      nav { padding: 10px; }
+      nav a { font-size: 0.85rem; margin: 6px 10px; }
+      section { padding: 60px 15px; }
+      .feature img { width: 40px; }
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.7rem; }
+      header img { width: 90px; }
+      .btn { padding: 10px 20px; font-size: 0.9rem; }
+      section h2 { font-size: 1.5rem; }
+      section p { font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
