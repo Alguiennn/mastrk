@@ -3,199 +3,173 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tutorial: While en C# — Estilo W3Schools</title>
+  <title>Tutorial: Números perfectos en C# — Estilo W3Schools</title>
   <style>
     :root{
-      --bg:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
-      --card:#f8fafc;
-      --accent:#10b981;
-      --accent-2:#06b6d4;
-      --border:#e5e7eb;
-      --code-bg:#0b1020;
-      --code-text:#e5e7eb;
-      --code-line:#1a2242;
-      --hl:#fde68a;
+      --bg:#ffffff; --text:#111827; --muted:#6b7280; --card:#f8fafc; --accent:#10b981; --accent-2:#06b6d4;
+      --border:#e5e7eb; --code-bg:#0b1020; --code-text:#e5e7eb; --code-line:#1a2242; --hl:#fde68a;
       --shadow:0 10px 20px rgba(0,0,0,.06);
     }
     .dark{
-      --bg:#0b0f19;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --card:#0f172a;
-      --accent:#22c55e;
-      --accent-2:#22d3ee;
-      --border:#1f2937;
-      --code-bg:#0a0f1f;
-      --code-text:#e5e7eb;
-      --code-line:#0f1a34;
-      --hl:#5b21b6;
+      --bg:#0b0f19; --text:#e5e7eb; --muted:#9ca3af; --card:#0f172a; --accent:#22c55e; --accent-2:#22d3ee;
+      --border:#1f2937; --code-bg:#0a0f1f; --code-text:#e5e7eb; --code-line:#0f1a34; --hl:#5b21b6;
       --shadow:0 10px 20px rgba(0,0,0,.25);
     }
-
     *{box-sizing:border-box}
-    body{
-      margin:0; font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial;
-      background:var(--bg); color:var(--text); line-height:1.6;
-    }
-
-    /* Header */
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:#062b22; padding:.8rem 1rem; box-shadow:var(--shadow);
-    }
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial;background:var(--bg);color:var(--text);line-height:1.6}
+    .topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#062b22;padding:.8rem 1rem;box-shadow:var(--shadow)}
     .topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1rem}
-    .brand{font-weight:800; letter-spacing:.2px; color:#042016}
+    .brand{font-weight:800;letter-spacing:.2px;color:#042016}
     .crumbs{opacity:.9}
     .spacer{flex:1}
-    .btn{
-      appearance:none; border:0; background:#ffffff; color:#0f172a;
-      padding:.5rem .8rem; border-radius:.6rem; font-weight:600; cursor:pointer;
-      box-shadow:0 4px 12px rgba(0,0,0,.15);
-    }
+    .btn{appearance:none;border:0;background:#fff;color:#0f172a;padding:.5rem .8rem;border-radius:.6rem;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15)}
     .btn:active{transform:translateY(1px)}
-
-    /* Layout */
-    .wrap{max-width:1100px; margin:1.2rem auto; padding:0 1rem; display:grid; gap:1rem; grid-template-columns: 1fr; }
-    @media(min-width:1000px){ .wrap{ grid-template-columns: 2fr 1fr; } }
-
-    /* Cards */
-    .card{
-      background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1rem 1.2rem; box-shadow:var(--shadow);
-    }
-    h1{margin:.2rem 0 1rem; font-size:2rem}
-    h2{margin:.2rem 0 .8rem; font-size:1.25rem}
-    p,li{color:var(--text)}
+    .wrap{max-width:1100px;margin:1.2rem auto;padding:0 1rem;display:grid;gap:1rem;grid-template-columns:1fr}
+    @media(min-width:1000px){.wrap{grid-template-columns:2fr 1fr}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;box-shadow:var(--shadow)}
+    h1{margin:.2rem 0 1rem;font-size:2rem}
+    h2{margin:.2rem 0 .8rem;font-size:1.25rem}
     .muted{color:var(--muted)}
-    .tag{display:inline-block; background:#e6fdf5; color:#065f46; padding:.2rem .5rem; border-radius:8px; font-size:.85rem; font-weight:700}
+    .tag{display:inline-block;background:#e6fdf5;color:#065f46;padding:.2rem .5rem;border-radius:8px;font-size:.85rem;font-weight:700}
     .dark .tag{background:#032e23;color:#a7f3d0}
-
-    /* Code block */
     .code-wrap{position:relative}
-    .copy{
-      position:absolute; right:.6rem; top:.6rem; font-size:.9rem;
-      background:transparent; color:var(--muted); border:1px solid var(--border); border-radius:8px; padding:.35rem .6rem; cursor:pointer;
-    }
+    .copy{position:absolute;right:.6rem;top:.6rem;font-size:.9rem;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:8px;padding:.35rem .6rem;cursor:pointer}
     .copy:hover{color:var(--text)}
-    pre.code{
-      margin:0; overflow:auto; background:var(--code-bg); color:var(--code-text);
-      border-radius:10px; padding:1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.95rem;
-      counter-reset: line;
-    }
-    /* line numbering */
-    .line{
-      display:block; padding:.05rem .5rem; border-left:4px solid transparent; background:linear-gradient(90deg,transparent,transparent 70%,rgba(255,255,255,.02) 100%);
-    }
-    .line::before{
-      counter-increment: line;
-      content: counter(line);
-      display:inline-block; width:2rem; opacity:.4; user-select:none; margin-right:.5rem;
-    }
-    .line.active{ background:linear-gradient(90deg,var(--code-line),transparent); border-left-color:var(--accent-2); }
-
-    /* Step-by-step list */
-    .steps{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.6rem}
-    .step{
-      background:rgba(255,255,255,.6); border:1px solid var(--border); padding:.7rem .8rem; border-radius:12px; cursor:pointer;
-    }
+    pre.code{margin:0;overflow:auto;background:var(--code-bg);color:var(--code-text);border-radius:10px;padding:1rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.95rem;counter-reset:line}
+    .line{display:block;padding:.05rem .5rem;border-left:4px solid transparent;background:linear-gradient(90deg,transparent,transparent 70%,rgba(255,255,255,.02) 100%)}
+    .line::before{counter-increment:line;content:counter(line);display:inline-block;width:2rem;opacity:.4;user-select:none;margin-right:.5rem}
+    .line.active{background:linear-gradient(90deg,var(--code-line),transparent);border-left-color:var(--accent-2)}
+    .steps{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.6rem}
+    .step{background:rgba(255,255,255,.6);border:1px solid var(--border);padding:.7rem .8rem;border-radius:12px;cursor:pointer}
     .dark .step{background:rgba(255,255,255,.03)}
     .step:hover{border-color:var(--accent-2)}
-    .step .badge{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:var(--accent-2); color:#06252a; font-weight:800; margin-right:.5rem}
-    .step small{color:var(--muted)}
-
-    /* Footer note */
-    .note{font-size:.9rem; color:var(--muted)}
+    .step .badge{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent-2);color:#06252a;font-weight:800;margin-right:.5rem}
+    .note{font-size:.9rem;color:var(--muted)}
   </style>
 </head>
 <body class="dark">
-  <!-- Top bar -->
   <header class="topbar">
     <div class="inner">
       <div class="brand">MiW3 • Guías</div>
-      <div class="crumbs">C# &rsaquo; Bucles &rsaquo; While</div>
+      <div class="crumbs">C# › Bucles y control › Números perfectos</div>
       <div class="spacer"></div>
       <button class="btn" id="themeBtn" title="Cambiar tema">Modo claro/oscuro</button>
     </div>
   </header>
 
   <main class="wrap">
-    <!-- Main column -->
     <section class="card" style="grid-column:1/2">
-      <h1>C# While Loop <span class="tag">Fundamentos</span></h1>
-      <p class="muted">El bucle <code>while</code> repite un bloque de código mientras la condición sea <strong>true</strong>.</p>
+      <h1>Números perfectos en C# <span class="tag">Ejercicio guiado</span></h1>
+      <p class="muted">El programa lee <strong>N</strong> números (hasta 1000) y para cada uno decide si es <em>perfecto</em> (la suma de sus divisores propios positivos es igual al propio número).</p>
     </section>
 
     <aside class="card" style="grid-column:2/3">
       <h2>Índice</h2>
       <ol class="muted">
         <li>Descripción</li>
-        <li>Sintaxis</li>
-        <li>Ejemplo</li>
+        <li>Sintaxis (código)</li>
         <li>Explicación paso a paso</li>
+        <li>Notas y buenas prácticas</li>
       </ol>
-      <p class="note">Consejo: pasa el ratón por cada paso para resaltar las líneas del código.</p>
+      <p class="note">Consejo: pasa el ratón por cada paso para resaltar su parte del código.</p>
     </aside>
 
     <section class="card" style="grid-column:1/2">
-      <h2>Descripción</h2>
-      <p>Usa <code>while</code> cuando no sabes de antemano cuántas veces iterarás y detienes el bucle al dejar de cumplirse una condición.</p>
-    </section>
-
-    <section class="card" style="grid-column:1/2">
-      <h2>Sintaxis</h2>
-      <div class="code-wrap">
-        <button class="copy" data-copy="#syntax">Copiar</button>
-        <pre id="syntax" class="code"><span class="line">while (condicion) {</span>
-<span class="line">    // código a ejecutar</span>
-<span class="line">}</span></pre>
-      </div>
-    </section>
-
-    <section class="card" style="grid-column:1/2">
-      <h2>Ejemplo</h2>
+      <h2>Código</h2>
       <div class="code-wrap">
         <button class="copy" data-copy="#example">Copiar</button>
-        <!-- Pega tu código aquí. Cada línea va en <span class="line"> -->
-        <pre id="example" class="code"><span class="line">int i = 0;</span>
-<span class="line">while (i &lt; 5)</span>
+        <pre id="example" class="code">
+<span class="line">int N = 5, i = 0, n = 0, d = 0, suma = 0, limite = 0;</span>
+<span class="line">try</span>
 <span class="line">{</span>
-<span class="line">    Console.WriteLine(i);</span>
-<span class="line">    i++;</span>
-<span class="line">}</span></pre>
+<span class="line">    for (i = 1; i &lt;= N; i = i + 1)</span>
+<span class="line">    {</span>
+<span class="line">        Console.Write("Número (1 - 1000): ");</span>
+<span class="line">        n = int.Parse(Console.ReadLine());</span>
+<span class="line"></span>
+<span class="line">        if (n &lt; 1 || n &gt; 1000)</span>
+<span class="line">        {</span>
+<span class="line">            Console.WriteLine("Fuera de rango.");</span>
+<span class="line">        }</span>
+<span class="line">        else</span>
+<span class="line">        {</span>
+<span class="line">            suma = 0;</span>
+<span class="line">            limite = n / 2;</span>
+<span class="line">            for (d = 1; d &lt;= limite; d = d + 1)</span>
+<span class="line">            {</span>
+<span class="line">                if (n % d == 0) suma = suma + d;</span>
+<span class="line">            }</span>
+<span class="line"></span>
+<span class="line">            if (suma == n) Console.WriteLine($"{n} Perfecto");</span>
+<span class="line">            else Console.WriteLine($"{n} No perfecto");</span>
+<span class="line">        }</span>
+<span class="line">    }</span>
+<span class="line">}</span>
+<span class="line">catch</span>
+<span class="line">{</span>
+<span class="line">    Console.WriteLine("Entrada inválida");</span>
+<span class="line">}</span>
+<span class="line">finally</span>
+<span class="line">{</span>
+<span class="line">    Console.WriteLine("Pulsa una tecla para salir...");</span>
+<span class="line">    Console.ReadKey();</span>
+<span class="line">}</span>
+        </pre>
       </div>
     </section>
 
-    <!-- Sidebar with step-by-step explanations -->
-    <aside class="card" style="grid-column:2/3; grid-row:3 / span 3">
+    <aside class="card" style="grid-column:2/3; grid-row:3 / span 2">
       <h2>Explicación paso a paso</h2>
-      <!-- Para vincular, usa data-lines="N" o "A-B" o "1,3,5" con respecto al bloque #example -->
       <ul class="steps" data-for="#example">
         <li class="step" data-lines="1">
           <span class="badge">1</span>
-          <strong>Inicialización</strong>
-          <div><small>Se crea <code>i</code> y se inicia en <code>0</code>.</small></div>
+          <strong>Variables</strong>
+          <div><small>Se declaran e inicializan: <code>N</code> (cantidad de entradas), <code>i</code>, <code>n</code>, <code>d</code>, <code>suma</code> y <code>limite</code>.</small></div>
         </li>
-        <li class="step" data-lines="2-3">
+        <li class="step" data-lines="2-3,24-30,31-35">
           <span class="badge">2</span>
-          <strong>Condición</strong>
-          <div><small>Mientras <code>i &lt; 5</code>, el cuerpo del bucle se ejecuta.</small></div>
+          <strong>Estructura try / catch / finally</strong>
+          <div><small><em>try</em> contiene la lógica principal; <em>catch</em> captura entradas no numéricas; <em>finally</em> siempre se ejecuta para pausar antes de salir.</small></div>
         </li>
-        <li class="step" data-lines="4">
+        <li class="step" data-lines="4-5,23">
           <span class="badge">3</span>
-          <strong>Acción</strong>
-          <div><small>Imprime el valor actual de <code>i</code>.</small></div>
+          <strong>Bucle externo</strong>
+          <div><small>Itera de 1 hasta <code>N</code> para procesar cada número introducido.</small></div>
         </li>
-        <li class="step" data-lines="5">
+        <li class="step" data-lines="6-7">
           <span class="badge">4</span>
-          <strong>Actualización</strong>
-          <div><small>Incrementa <code>i</code> para progresar hacia la salida.</small></div>
+          <strong>Entrada del usuario</strong>
+          <div><small>Se solicita el número y se convierte con <code>int.Parse</code>. Si el texto no es entero, saltará al <em>catch</em>.</small></div>
         </li>
-        <li class="step" data-lines="2-5">
+        <li class="step" data-lines="9-12">
           <span class="badge">5</span>
-          <strong>Repetición</strong>
-          <div><small>Cuando <code>i</code> llega a 5, la condición es falsa y el bucle termina.</small></div>
+          <strong>Validación de rango</strong>
+          <div><small>Solo se aceptan valores en [1, 1000]. Fuera de ese rango, se avisa y se continúa con la siguiente iteración.</small></div>
+        </li>
+        <li class="step" data-lines="13-16">
+          <span class="badge">6</span>
+          <strong>Preparación del cálculo</strong>
+          <div><small>Se reinicia <code>suma</code> y se fija <code>limite = n / 2</code> porque ningún divisor propio de <code>n</code> puede superar <code>n/2</code>.</small></div>
+        </li>
+        <li class="step" data-lines="17-20">
+          <span class="badge">7</span>
+          <strong>Divisores propios</strong>
+          <div><small>Bucle que prueba <code>d</code> desde 1 hasta <code>limite</code>. Si <code>n % d == 0</code>, se acumula en <code>suma</code>.</small></div>
+        </li>
+        <li class="step" data-lines="22-23">
+          <span class="badge">8</span>
+          <strong>¿Perfecto o no?</strong>
+          <div><small>Un número es perfecto si la suma de sus divisores propios (<code>suma</code>) coincide con <code>n</code> (ej.: 6 → 1+2+3).</small></div>
+        </li>
+        <li class="step" data-lines="26-29">
+          <span class="badge">9</span>
+          <strong>Errores de entrada</strong>
+          <div><small>Cualquier fallo al convertir el texto a entero muestra “Entrada inválida”.</small></div>
+        </li>
+        <li class="step" data-lines="31-35">
+          <span class="badge">10</span>
+          <strong>Cierre controlado</strong>
+          <div><small>Mensaje final y <code>ReadKey()</code> para esperar una tecla antes de terminar.</small></div>
         </li>
       </ul>
     </aside>
@@ -203,25 +177,22 @@
     <section class="card" style="grid-column:1/3">
       <h2>Notas y buenas prácticas</h2>
       <ul>
-        <li>Evita bucles infinitos: asegúrate de que la condición cambie dentro del bucle.</li>
-        <li>Si conoces el número de iteraciones, considera <code>for</code>.</li>
-        <li>Para depurar, imprime la variable de control y observa cómo evoluciona.</li>
+        <li>Si quieres máximo rendimiento, podrías iterar divisores hasta <code>√n</code> y añadir el par complementario.</li>
+        <li>Usa <code>int.TryParse</code> para evitar excepciones por formato y validar de forma más limpia.</li>
+        <li>Para probar, intenta con 6, 28, 496 (perfectos) y con otros no perfectos.</li>
       </ul>
-      <p class="note">Esta página es una plantilla. Reemplaza el ejemplo y ajusta los <code>data-lines</code> en el panel de la derecha para explicar tu propio código.</p>
     </section>
   </main>
 
   <script>
-    // Tema claro/oscuro
     const themeBtn = document.getElementById('themeBtn');
     themeBtn.addEventListener('click',()=> document.body.classList.toggle('dark'));
 
-    // Copiar al portapapeles
     document.querySelectorAll('.copy').forEach(btn=>{
       btn.addEventListener('click', async ()=>{
         const sel = btn.getAttribute('data-copy');
         const el = document.querySelector(sel);
-        const text = el.innerText.replace(/\u200B/g,''); // por si hubiera soft chars
+        const text = el.innerText.replace(/\u200B/g,'');
         try{
           await navigator.clipboard.writeText(text);
           const old = btn.textContent;
@@ -234,51 +205,32 @@
       });
     });
 
-    // Resaltado sincronizado entre pasos y líneas
     function parseLines(str){
-      // "1" | "2-5" | "1,3,7"
-      const parts = str.split(',');
-      const nums = new Set();
-      for(const p of parts){
+      return str.split(',').flatMap(p=>{
         if(p.includes('-')){
-          const [a,b] = p.split('-').map(n=>parseInt(n.trim(),10));
-          for(let i=a;i<=b;i++) nums.add(i);
-        }else{
-          nums.add(parseInt(p.trim(),10));
-        }
-      }
-      return [...nums].filter(n=>!Number.isNaN(n));
+          const [a,b]=p.split('-').map(n=>parseInt(n.trim(),10)); const out=[];
+          for(let i=a;i<=b;i++) out.push(i); return out;
+        } else { const n=parseInt(p.trim(),10); return Number.isNaN(n)?[]:[n]; }
+      });
     }
-
     function clearActive(container){
       container.querySelectorAll('.line.active').forEach(l=>l.classList.remove('active'));
     }
-
-    // Vincular cada lista .steps con su bloque de código destino
     document.querySelectorAll('.steps').forEach(list=>{
       const targetSel = list.getAttribute('data-for') || '#example';
       const code = document.querySelector(targetSel);
       const lines = code ? [...code.querySelectorAll('.line')] : [];
-
       list.querySelectorAll('.step').forEach(step=>{
         const map = parseLines(step.getAttribute('data-lines')||'');
         const activate = (on)=> map.forEach(n=>{
-          const el = lines[n-1];
-          if(el){ el.classList.toggle('active', on); }
+          const el = lines[n-1]; if(el){ el.classList.toggle('active', on); }
         });
-
         step.addEventListener('mouseenter', ()=>activate(true));
         step.addEventListener('mouseleave', ()=>activate(false));
         step.addEventListener('click', ()=>{
-          // click fija el resaltado (toggle)
           const isAnyActive = map.some(n => lines[n-1]?.classList.contains('active'));
-          clearActive(code);
-          activate(!isAnyActive);
-          // scroll a primera línea
-          const first = lines[map[0]-1];
-          if(first){
-            first.scrollIntoView({behavior:'smooth', block:'center', inline:'nearest'});
-          }
+          clearActive(code); activate(!isAnyActive);
+          const first = lines[map[0]-1]; if(first){ first.scrollIntoView({behavior:'smooth', block:'center'}); }
         });
       });
     });
