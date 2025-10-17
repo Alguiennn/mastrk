@@ -148,6 +148,7 @@
   <!-- NAV -->
   <header class="topbar">
     <div class="inner">
+      <button class="btn" id="themeBtn" title="Cambiar tema">Tema</button>
       <div class="brand">
         <span>Numeros Perfectos • Explicado</span>
       </div>
@@ -275,8 +276,11 @@
 
 <script>
   // Tema (mantiene estilos)
-  document.getElementById('themeBtn').addEventListener('click',()=>document.body.classList.toggle('light'));
-
+  const themeBtn = document.getElementById('themeBtn');
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => document.body.classList.toggle('light'));
+}
+  
   // Copiar código
   document.querySelectorAll('.copy').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
