@@ -11,6 +11,7 @@
   <!-- Estilos -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
+<script src="javascript/script.js"></script>
 <body>
   <!-- NAV FIJA -->
   <header class="nav">
@@ -64,34 +65,31 @@
       </div>
     </section>
 
-    <!-- <section id="" class="section section--alt">
+    <section id="carrera" class="section section--alt">
       <div class="container section__inner section__inner--split">
         <div>
-          <h2>Carrera Profesional</h2>
-          <p>
-            
-          </p>
-          <p>
-            
+          <h2 id="carrera_titulo">Carrera Profesional</h2>
+          <p id="carrera_subtitulo">
+            A continuación un recorrido por mi carrera profesional.
           </p>
         </div>
-        <div class="about__highlights">
+        <div class="carrera__highlights">
           <div class="highlight">
-            <span class="highlight__label">Enfoque</span>
-            <p>Seguridad ofensiva, automatización y desarrollo full stack.</p>
+            <span class="highlight__label">La Ereta (restaurante)</span>
+            <p></p>
           </div>
           <div class="highlight">
-            <span class="highlight__label">Objetivo</span>
-            <p>Trabajar en equipos de ciberseguridad (Red Team) y seguir creando herramientas útiles.</p>
+            <span class="highlight__label">La Mala Uva de Juli (restaurante)</span>
+            <p></p>
           </div>
           <div class="highlight">
-            <span class="highlight__label">Soft skills</span>
-            <p>Aprendizaje rápido, documentación clara y enfoque práctico.</p>
+            <span class="highlight__label">Proximamente...</span>
+            <p></p>
           </div>
         </div>
       </div>
-    </section> -->
-
+    </section>
+     
     <!-- PROYECTOS -->
     <section id="projects" class="section">
       <div class="container">
@@ -165,7 +163,7 @@
         </div>
       </div>
     </section>
-
+    
     <!-- TECNOLOGÍAS -->
     <section id="stack" class="section section--alt">
       <div class="container">
@@ -259,9 +257,25 @@
     </div>
   </footer>
 
-  <script>
-    // Año automático en el footer
+  <!-- <script>
+    // 1. Año automático en el footer
     document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+
+    // 2. Efecto Spotlight (Seguimiento del ratón)
+    // AHORA INCLUIMOS ".highlight" EN LA SELECCIÓN
+    const cards = document.querySelectorAll(".card, .highlight");
+
+    cards.forEach((el) => {
+      el.onmousemove = (e) => {
+        // Obtenemos la posición del ratón relativa a la tarjeta
+        const x = e.pageX - el.offsetLeft;
+        const y = e.pageY - el.offsetTop;
+
+        // Enviamos las coordenadas al CSS
+        el.style.setProperty("--mouse-x", `${x}px`);
+        el.style.setProperty("--mouse-y", `${y}px`);
+      };
+    });
+</script> -->
 </body>
 </html>

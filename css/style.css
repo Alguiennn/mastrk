@@ -295,8 +295,8 @@ main {
   justify-content: space-between;
 }
 
-/* ===== Sobre mí ===== */
-.about__highlights {
+/* ===== Carrera Profesional ===== */
+.carrera__highlights {
   display: grid;
   gap: 0.8rem;
   min-width: 240px;
@@ -471,4 +471,78 @@ main {
   .nav__links {
     font-size: 0.85rem;
   }
+}
+
+.highlight {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s, background-color 0.3s;
+  z-index: 1;
+}
+
+/* TEXTO DESENFOCADO */
+.highlight p, 
+.highlight .highlight__label {
+  filter: blur(3px);
+  opacity: 0.5;
+  transition: all 0.4s ease;
+}
+
+/* TEXTO NÍTIDO */
+.highlight:hover p,
+.highlight:hover .highlight__label {
+  filter: blur(0);
+  opacity: 1;
+  color: #fff;
+}
+
+/* Efecto de luz (Linterna) */
+.highlight::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.05),
+    transparent 40%
+  );
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.highlight:hover::before {
+  opacity: 1;
+}
+
+/* Pequeño movimiento al interactuar */
+.highlight:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+#carrera .section__inner {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#carrera .section__inner > div:first-child {
+  max-width: 700px;
+  margin-bottom: 2.5rem;
+}
+
+
+.carrera__highlights {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.highlight {
+  text-align: left; 
 }
