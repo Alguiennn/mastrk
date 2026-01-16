@@ -22,20 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---------------------------------------------
-     3. TELEFONO: CLICK TO REVEAL (OFUSCACIÓN)
+     3. TELEFONO: CLICK TO REVEAL (BASE64 OFUSCADO)
      --------------------------------------------- */
   const phoneBtn = document.getElementById('phone-btn');
   const phoneDisplay = document.getElementById('phone-display');
 
   if (phoneBtn) {
-    const part1 = "+34"; 
-    const part2 = "643";
-    const part3 = "377";
-    const part4 = "490";
-    const fullNumber = `${part1} ${part2} ${part3} ${part4}`;
+    const secret = "KzM0IDY0MyAzNzcgNDkw";
 
     phoneBtn.addEventListener('click', (e) => {
       e.preventDefault();
+
+      const fullNumber = atob(secret);
 
       if (phoneDisplay.classList.contains('revealed')) {
         navigator.clipboard.writeText(fullNumber).then(() => {
