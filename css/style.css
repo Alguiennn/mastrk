@@ -273,7 +273,11 @@ main {
 }
 
 .section__header {
-  margin-bottom: 1.8rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
 }
 
 .section__header h2 {
@@ -283,6 +287,8 @@ main {
 .section__subtitle {
   color: var(--text-muted);
   max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section__inner {
@@ -323,7 +329,9 @@ main {
 }
 
 .projects__grid {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 320px));
+  justify-content: center;
+  align-items: start;
 }
 
 .card {
@@ -354,12 +362,14 @@ main {
   font-size: 0.8rem;
   color: var(--text-muted);
   margin-bottom: 0.8rem;
+  text-align: center;
 }
 
 .project__links a {
   font-size: 0.85rem;
   color: var(--accent);
   text-decoration: none;
+  text-align: center;
 }
 
 .project__links a:hover {
@@ -544,5 +554,26 @@ main {
 }
 
 .highlight {
-  text-align: left; 
+  text-align: center; 
+}
+
+.hero__image {
+  width: 50%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+
+  box-shadow: var(--shadow-strong);
+}
+
+#phone-display {
+  transition: color 0.3s ease;
+}
+
+/* Cuando aún no se ha revelado, que parezca un botón interactivo */
+#phone-btn:not(:hover) #phone-display:not(.revealed) {
+  opacity: 0.7;
 }
