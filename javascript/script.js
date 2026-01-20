@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------------------------------------------
-     2. EFECTO SPOTLIGHT (LINTERNA)
+     2. EFECTO SPOTLIGHT
      --------------------------------------------- */
   const cards = document.querySelectorAll('.card, .highlight');
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---------------------------------------------
-     3. TELEFONO: CLICK TO REVEAL (BASE64 OFUSCADO)
+     3. TELEFONO: CLICK TO REVEAL
      --------------------------------------------- */
   const phoneBtn = document.getElementById('phone-btn');
   const phoneDisplay = document.getElementById('phone-display');
